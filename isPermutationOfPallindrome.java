@@ -43,6 +43,8 @@ boolean checkForMaxOneOdd(int[] table){
     return true;
 }
 
+
+
 //Approach 2
 //USING BIT Vector
 //We will use a bit vector (integer of 32 bits ) and map each alphabet 'a'-'z' to a bit.
