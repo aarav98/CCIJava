@@ -1,2 +1,1 @@
-# CCiJava
 # CCIJava
