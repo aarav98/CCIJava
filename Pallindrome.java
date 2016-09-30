@@ -52,5 +52,37 @@ boolean isEqual(LinkedListNode one, LinkedListNode two){
         head2 = head2.next;
     }
     
-    return head1 == null && head2 == null;
+    return head1 == null && head2 == null; // this checks that the both lists have no member left unvisited ie, one list is not longer than the other
 }
+
+//////////////////////Approach 2/////////////////
+////////////////////Iterative approach //////////
+//Use stack 
+// add values of first half nodes on stack and compare those values with rest of the list
+
+boolean isPallindrome(LinkedListNode head){
+    LinkedListNode fast = head;
+    LinkedListNode slow = head;
+    
+    while(fast != null || fast.next != null){    //This loop and the loop below can be combined
+        fast = fast.next.next;                   //Just push the data of each node through slow node during first pass and the second loop won't be needed
+        slow = slow.next;    
+    }    
+    Stack<Integer> stack = new Stack<Integer>();    
+    LinkedListNode fast = head;    
+    while(fast != slow){    
+        stack.push(fast.data);    
+        fast = fast.next;
+    }
+    if (fast != null) slow = slow.next;
+    
+    while(slow != null){
+        if(slow.data != stack.pop()) return false;
+        slow = slow.next;
+    }
+    
+    return stack.isEmpty();
+}
+
+
+
