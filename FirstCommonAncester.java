@@ -47,3 +47,31 @@ TreeNode getSibling(TreeNode node){
     TreeNode parent = node.parent;
     return parent.left==node?rparent.right:parent.left;
 }
+
+///Approach 3
+
+//Without links to parents
+
+TreeNode commonAncestor(TreeNode root, TreeNode p. TreeNode q){
+    if(!covers(root,p)|| !covers(root, q)) return false;
+    return ancestorHelper(root, p, q);
+}
+
+TreeNode ancestorHelper(TreeNode root, TreeNode p, TreeNode q){
+    if (root==null) return null;
+    else if(root==p) return p;
+    else if (root==q) return q;
+    
+    boolean pIsOnLeft = covers(root.left, p);
+    boolean qisOnLeft = covers(root.left, q);
+    
+    if(pIsOnLeft != qIsOnLeft) return root;
+    
+    TreeNode childSide = pIsOnLeft? root.left : root.right;
+    return ancestorHelper(childSide, p, q);
+}
+boolean covers(TreeNode root, TreeNode p){
+    if(root == null) return false;
+    if(root == p) return true;
+    return covers(root.left, p) || covers(root.right, p);
+}
